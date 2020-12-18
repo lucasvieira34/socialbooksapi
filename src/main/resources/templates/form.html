@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <title>SocialBooks</title>
+</head>
+<body onload="onLoad()">
+    <div class="container" id="livros">
+            <form v-for="livro in livros">
+                <!-- 2 column grid layout with text inputs for the first and last names -->
+                <div class="row mb-4">
+                    <div class="col">
+                        <div class="form-outline">
+                            <label class="form-label">Nome do Livro</label>
+                            <textarea>{{livro.nome}}</textarea>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-outline">
+                            <label class="form-label">Editora</label>
+                            <textarea>{{livro.editora}}</textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Text input -->
+                <div class="form-outline mb-4">
+                    <label class="form-label">Nome do Autor</label>
+                    <textarea>{{livro.autor.nome}}</textarea>
+                </div>
+
+                <!-- Text input -->
+                <div class="form-outline mb-4">
+                    <label class="form-label">Nascimento</label>
+                    <textarea>{{livro.autor.nascimento}}</textarea>
+                </div>
+
+                <!-- Text input -->
+                <div class="form-outline mb-4">
+                    <label class="form-label">Resumo</label>
+                    <textarea>{{livro.resumo}}</textarea>
+                </div>
+
+                <!-- Text input -->
+                <div class="form-outline mb-4">
+                    <label class="form-label">Nacionalidade</label>
+                    <textarea>{{livro.autor.nacionalidade}}</textarea>
+                </div>
+
+                <!-- Message input -->
+                <div class="form-outline mb-4">
+                    <label class="form-label">Comentário</label>
+                    <textarea>{{livro.comentarios.comentario}}</textarea>
+                </div>
+
+            </form>
+    </div>
+    <script>
+        function onLoad() {
+            var app = new Vue({
+                el: '#livros',
+                data: {
+                    livros: []
+                },
+                mounted () {
+                    axios
+                      .get('http://localhost:8080/livros')
+                      .then(response => (this.livros = response.data))
+                  }
+            })
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous"></script>
+</body>
+</html>
